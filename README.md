@@ -242,7 +242,7 @@ Make sure the following are installed:
 ### 1. Clone the repository
 
 ```bash
-git clone <YOUR-BIOOS-GITHUB-URL>
+git clone https://github.com/riapatil05/BioOS.git
 cd BioOS
 ```
 
