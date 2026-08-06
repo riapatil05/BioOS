@@ -1,0 +1,826 @@
+/* ==========================================================================
+   BioOS
+   Research graph interface
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   Global
+   -------------------------------------------------------------------------- */
+
+:root {
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: #e5e7eb;
+  background: #080c14;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+body {
+  background:
+    radial-gradient(
+      circle at 50% -20%,
+      #17213a 0%,
+      #0b101c 38%,
+      #070a11 100%
+    );
+
+  color: #e5e7eb;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+
+/* --------------------------------------------------------------------------
+   Application
+   -------------------------------------------------------------------------- */
+
+.bioos-app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+
+.app-header {
+  min-height: 82px;
+  padding: 18px 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid #202838;
+  background: rgba(8, 12, 20, 0.88);
+  backdrop-filter: blur(14px);
+}
+
+.app-title {
+  margin: 0;
+
+  font-size: 25px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+
+  color: #f8fafc;
+}
+
+.app-subtitle {
+  margin: 7px 0 0;
+
+  font-size: 12px;
+  color: #7f8ba3;
+  letter-spacing: 0.02em;
+}
+
+.graph-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 12px;
+  color: #8894a9;
+}
+
+.summary-divider {
+  color: #3f4a5e;
+}
+
+
+/* --------------------------------------------------------------------------
+   Workspace
+   -------------------------------------------------------------------------- */
+
+.workspace {
+  flex: 1;
+
+  display: grid;
+  grid-template-columns:
+    280px
+    minmax(420px, 1fr)
+    280px;
+
+  min-height: 610px;
+}
+
+
+/* --------------------------------------------------------------------------
+   Shared panels
+   -------------------------------------------------------------------------- */
+
+.left-panel,
+.node-details {
+  background: rgba(10, 15, 25, 0.82);
+}
+
+.left-panel {
+  border-right: 1px solid #202838;
+}
+
+.node-details {
+  border-left: 1px solid #202838;
+}
+
+.panel-label {
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+
+  color: #64748b;
+}
+
+
+/* --------------------------------------------------------------------------
+   Import panel
+   -------------------------------------------------------------------------- */
+
+.import-panel {
+  padding: 22px;
+
+  border-bottom: 1px solid #202838;
+}
+
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 13px;
+}
+
+.text-button {
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: #8b9cff;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.text-button:hover {
+  color: #b4bfff;
+}
+
+.import-textarea {
+  width: 100%;
+  min-height: 175px;
+
+  padding: 13px;
+
+  resize: vertical;
+
+  border: 1px solid #293246;
+  border-radius: 7px;
+
+  outline: none;
+
+  background: #0b111d;
+  color: #dce3ee;
+
+  font-family:
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 11px;
+  line-height: 1.6;
+
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.import-textarea::placeholder {
+  color: #4d596d;
+}
+
+.import-textarea:focus {
+  border-color: #6575e8;
+
+  box-shadow:
+    0 0 0 3px rgba(101, 117, 232, 0.1);
+}
+
+.primary-button {
+  width: 100%;
+
+  margin-top: 11px;
+  padding: 9px 12px;
+
+  border: 1px solid #6575e8;
+  border-radius: 6px;
+
+  background: #5363d9;
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  transition:
+    background 120ms ease,
+    transform 120ms ease;
+}
+
+.primary-button:hover:not(:disabled) {
+  background: #6575e8;
+}
+
+.primary-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+
+/* --------------------------------------------------------------------------
+   Error messages
+   -------------------------------------------------------------------------- */
+
+.error-message {
+  margin-top: 10px;
+  padding: 9px 10px;
+
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  border-radius: 6px;
+
+  background: rgba(127, 29, 29, 0.15);
+  color: #fca5a5;
+
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+
+/* --------------------------------------------------------------------------
+   Object legend
+   -------------------------------------------------------------------------- */
+
+.object-legend {
+  padding: 22px;
+}
+
+.object-legend > .panel-label {
+  margin-bottom: 15px;
+}
+
+.legend-row {
+  display: grid;
+  grid-template-columns: 9px 1fr auto;
+
+  align-items: center;
+  gap: 10px;
+
+  padding: 6px 0;
+}
+
+.legend-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+}
+
+.legend-label {
+  font-size: 12px;
+  color: #a8b1c2;
+}
+
+.legend-count {
+  font-size: 11px;
+  color: #566176;
+
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* --------------------------------------------------------------------------
+   Graph panel
+   -------------------------------------------------------------------------- */
+
+.graph-panel {
+  position: relative;
+
+  min-width: 0;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(30, 41, 65, 0.28),
+      transparent 58%
+    );
+}
+
+.research-graph-container {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  min-height: 610px;
+
+  overflow: hidden;
+}
+
+.research-graph {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+  min-height: 610px;
+}
+
+
+/* --------------------------------------------------------------------------
+   Empty graph
+   -------------------------------------------------------------------------- */
+
+.graph-empty-state {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: min(360px, 80%);
+
+  transform: translate(-50%, -50%);
+
+  text-align: center;
+
+  pointer-events: none;
+}
+
+.graph-empty-title {
+  margin-bottom: 9px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  color: #b6c0d0;
+}
+
+.graph-empty-state p {
+  margin: 0;
+
+  color: #596579;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+
+/* --------------------------------------------------------------------------
+   D3 graph
+   -------------------------------------------------------------------------- */
+
+.graph-edge {
+  opacity: 0.68;
+}
+
+.graph-node {
+  transition: opacity 100ms ease;
+}
+
+.graph-node:hover {
+  opacity: 0.85;
+}
+
+.graph-node-label {
+  fill: #aeb8c9;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+
+  font-size: 10px;
+
+  pointer-events: none;
+}
+
+
+/* --------------------------------------------------------------------------
+   Node details
+   -------------------------------------------------------------------------- */
+
+.node-details {
+  padding: 22px;
+}
+
+.node-details.empty-state {
+  color: #596579;
+}
+
+.node-details.empty-state p {
+  margin-top: 18px;
+
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.node-type {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 13px;
+
+  color: #7e899c;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.node-type-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+}
+
+.node-title {
+  margin: 0 0 12px;
+
+  color: #edf1f7;
+
+  font-size: 20px;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+}
+
+.node-summary {
+  margin: 0;
+
+  color: #939daf;
+
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.connections-heading {
+  margin-top: 28px;
+  margin-bottom: 10px;
+
+  color: #596579;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+}
+
+.empty-connections {
+  color: #4e596c;
+  font-size: 11px;
+}
+
+.connections-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.connection-item {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 2px 7px;
+
+  padding: 9px;
+
+  text-align: left;
+
+  border: 1px solid transparent;
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: inherit;
+}
+
+.connection-item:hover {
+  border-color: #283247;
+  background: #0d1422;
+}
+
+.connection-direction {
+  grid-row: span 2;
+
+  color: #66758c;
+
+  font-size: 13px;
+}
+
+.connection-type {
+  color: #596579;
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+
+  text-transform: uppercase;
+}
+
+.connection-name {
+  color: #aab4c5;
+
+  font-size: 11px;
+}
+
+
+/* --------------------------------------------------------------------------
+   Ask panel
+   -------------------------------------------------------------------------- */
+
+.ask-panel {
+  padding: 14px 28px 18px;
+
+  border-top: 1px solid #202838;
+
+  background: rgba(8, 12, 20, 0.96);
+}
+
+.ask-context {
+  margin-bottom: 9px;
+
+  color: #68758a;
+
+  font-size: 10px;
+}
+
+.ask-context strong {
+  color: #9da9bc;
+  font-weight: 600;
+}
+
+.ask-form {
+  display: flex;
+  gap: 9px;
+
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.ask-input {
+  flex: 1;
+
+  padding: 11px 13px;
+
+  outline: none;
+
+  border: 1px solid #293246;
+  border-radius: 7px;
+
+  background: #0b111d;
+  color: #e1e7f0;
+
+  font-size: 12px;
+
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.ask-input::placeholder {
+  color: #4f5a6d;
+}
+
+.ask-input:focus {
+  border-color: #6575e8;
+
+  box-shadow:
+    0 0 0 3px rgba(101, 117, 232, 0.09);
+}
+
+.ask-button {
+  min-width: 75px;
+
+  padding: 0 18px;
+
+  border: 1px solid #6575e8;
+  border-radius: 7px;
+
+  background: #5363d9;
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.ask-button:hover:not(:disabled) {
+  background: #6575e8;
+}
+
+
+/* --------------------------------------------------------------------------
+   Generated answer
+   -------------------------------------------------------------------------- */
+
+.answer-card {
+  max-width: 980px;
+
+  margin: 12px auto 0;
+  padding: 15px;
+
+  border: 1px solid #293246;
+  border-radius: 8px;
+
+  background: #0c121e;
+}
+
+.answer-heading {
+  margin-bottom: 8px;
+
+  color: #7484f5;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.answer-text {
+  color: #c9d1de;
+
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.inline-reference {
+  display: inline;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: #91a0ff;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.inline-reference:hover {
+  text-decoration: underline;
+}
+
+.answer-references {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+
+  margin-top: 13px;
+}
+
+.reference-label {
+  margin-right: 3px;
+
+  color: #505b6e;
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.reference-chip {
+  padding: 4px 7px;
+
+  border: 1px solid #303a50;
+  border-radius: 999px;
+
+  background: #111827;
+  color: #8f9bad;
+
+  font-size: 9px;
+}
+
+.reference-chip:hover {
+  border-color: #5665c8;
+  color: #b5bfff;
+}
+
+.save-finding-button {
+  margin-top: 13px;
+  padding: 6px 10px;
+
+  border: 1px solid #303a50;
+  border-radius: 5px;
+
+  background: transparent;
+  color: #8793a6;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.save-finding-button:hover {
+  border-color: #5665c8;
+  color: #b3bcff;
+}
+
+
+/* --------------------------------------------------------------------------
+   Scrollbars
+   -------------------------------------------------------------------------- */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #30394a transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #30394a;
+  border-radius: 10px;
+}
+
+
+/* --------------------------------------------------------------------------
+   Responsive layout
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1050px) {
+  .workspace {
+    grid-template-columns:
+      245px
+      minmax(400px, 1fr)
+      245px;
+  }
+}
+
+@media (max-width: 850px) {
+  .workspace {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .left-panel,
+  .node-details {
+    border: none;
+    border-bottom: 1px solid #202838;
+  }
+
+  .research-graph-container,
+  .research-graph {
+    min-height: 520px;
+  }
+
+  .app-header {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .ask-panel {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}

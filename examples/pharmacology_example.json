@@ -1,0 +1,10 @@
+{
+  "name": "EGFR Targeted Therapy",
+  "description": "EGFR signaling and pharmacological inhibition.",
+  "text": "EGFR is frequently activated in non-small cell lung cancer and promotes tumor cell proliferation through downstream signaling pathways. Osimertinib targets mutant EGFR and inhibits EGFR signaling. EGFR inhibition reduces proliferation of EGFR-mutant tumor cells.",
+  "questions": [
+    "What does osimertinib target?",
+    "What disease is EGFR associated with?",
+    "What happens when EGFR signaling is inhibited?"
+  ]
+}

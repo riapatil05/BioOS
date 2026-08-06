@@ -1,0 +1,10 @@
+{
+  "name": "PIK3CA in Breast Cancer",
+  "description": "PIK3CA signaling and targeted therapy in breast cancer.",
+  "text": "PIK3CA mutations are frequently observed in hormone receptor-positive breast cancer. PIK3CA activates the PI3K-AKT signaling pathway and promotes tumor cell growth. Alpelisib targets PI3K alpha and is used in PIK3CA-mutated breast cancer.",
+  "questions": [
+    "What pathway is associated with PIK3CA?",
+    "What does alpelisib target?",
+    "How is PIK3CA related to breast cancer?"
+  ]
+}

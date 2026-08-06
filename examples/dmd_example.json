@@ -1,0 +1,10 @@
+{
+  "name": "Duchenne Muscular Dystrophy",
+  "description": "Transcriptomic changes associated with Duchenne muscular dystrophy.",
+  "text": "Duchenne muscular dystrophy is caused by loss of dystrophin. DMD skeletal muscle shows increased expression of SPP1 and COL1A1. SPP1 is associated with inflammatory and fibrotic remodeling. Mitochondrial oxidative phosphorylation pathways are reduced in DMD skeletal muscle.",
+  "questions": [
+    "What is SPP1 associated with?",
+    "Which genes are associated with Duchenne muscular dystrophy?",
+    "What biological processes are altered in Duchenne muscular dystrophy?"
+  ]
+}
