@@ -10,6 +10,12 @@ Instead of treating every interaction as an isolated chat, BioOS extracts struct
 
 ## See BioOS in action
 
+### Demo
+
+A short walkthrough of BioOS showing scientific text import, research graph construction, graph exploration, and graph-grounded question answering.
+
+https://github.com/user-attachments/assets/688e781e-1c1f-49f0-a02f-2662de264648
+
 ### Build a research graph from scientific text
 
 <p align="center">
