@@ -24,6 +24,7 @@ NodeType = Literal[
     "Disease",
 ]
 
+
 RelationshipType = Literal[
     "MENTIONS",
     "SUPPORTS",
@@ -45,6 +46,7 @@ class ExtractedObject(BaseModel):
     """A biomedical object extracted from scientific text."""
 
     tempId: str
+
     type: Literal[
         "Gene",
         "Drug",
@@ -53,6 +55,7 @@ class ExtractedObject(BaseModel):
         "Hypothesis",
         "Disease",
     ]
+
     name: str
     summary: str = ""
 
@@ -62,6 +65,7 @@ class ExtractedRelationship(BaseModel):
 
     from_id: str = Field(alias="from")
     to_id: str = Field(alias="to")
+
     type: Literal[
         "SUPPORTS",
         "CONTRADICTS",
@@ -117,15 +121,21 @@ class GraphEdge(BaseModel):
 # ---------------------------------------------------------------------------
 
 class AskRequest(BaseModel):
-    """Question and graph state sent to the reasoning pipeline."""
+    """Question and graph/project state sent to the reasoning pipeline."""
 
     question: str
+
     nodes: List[GraphNode]
+
     edges: List[GraphEdge]
 
     # If supplied, retrieval is restricted to this node
     # and its immediate graph neighbourhood.
     selected_node_id: Optional[str] = None
+
+    # If supplied, BioOS also retrieves the persistent
+    # research-project context.
+    project_id: Optional[str] = None
 
 
 class AskResponse(BaseModel):
@@ -133,3 +143,81 @@ class AskResponse(BaseModel):
 
     answer: str
     referenced: List[str]
+
+
+# ---------------------------------------------------------------------------
+# Project Layer schemas
+# ---------------------------------------------------------------------------
+
+ResearchObjectType = Literal[
+    "dataset",
+    "paper",
+    "code",
+    "analysis",
+    "finding",
+    "hypothesis",
+    "figure",
+    "note",
+]
+
+
+class ProjectCreate(BaseModel):
+    name: str
+    description: str = ""
+
+
+class ProjectUpdate(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+
+
+class ProjectResponse(BaseModel):
+    id: str
+    slug: str
+    name: str
+    description: str
+    created_at: str
+    updated_at: str
+
+
+class ResearchObjectCreate(BaseModel):
+    type: ResearchObjectType
+    name: str
+    summary: str = ""
+    content: str = ""
+    external_url: str = ""
+
+
+class ResearchObjectUpdate(BaseModel):
+    type: Optional[ResearchObjectType] = None
+    name: Optional[str] = None
+    summary: Optional[str] = None
+    content: Optional[str] = None
+    external_url: Optional[str] = None
+
+
+class ResearchObjectResponse(BaseModel):
+    id: str
+    project_id: str
+    type: ResearchObjectType
+    name: str
+    summary: str
+    content: str
+    external_url: str
+    created_at: str
+    updated_at: str
+
+
+class ObjectRelationshipCreate(BaseModel):
+    source_id: str
+    target_id: str
+    type: str
+
+
+class ObjectRelationshipResponse(BaseModel):
+    id: str
+    project_id: str
+    source_id: str
+    target_id: str
+    type: str
+    created_at: str

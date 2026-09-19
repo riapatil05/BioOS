@@ -1,212 +1,349 @@
-# BioOS
+# CompBioGraph
 
-### A research graph that remembers.
+### Computational Biology Research Infrastructure — with BioOS Intelligence
 
-BioOS is a local-first research workspace that transforms scientific text into a persistent, queryable knowledge graph.
+CompBioGraph is a local-first research workspace for organizing computational biology research into persistent, connected research objects.
 
-Instead of treating every interaction as an isolated chat, BioOS extracts structured research objects — such as genes, drugs, diseases, pathways, findings, and hypotheses — connects them through relationships, and allows researchers to query the resulting graph using natural language.
+The platform combines a structured research-object layer, relationship graphs, project workspaces, and graph-grounded AI assistance through **BioOS Intelligence**.
 
-> **From scientific text → structured research objects → connected knowledge → graph-grounded answers.**
-
-## See BioOS in action
-
-### Build a research graph from scientific text
-
-<p align="center">
-  <img src="assets/bioos_graph.png" alt="BioOS interactive research knowledge graph" width="100%">
-</p>
-
-BioOS turns unstructured scientific text into an interactive research graph.
-
-A researcher can paste a scientific abstract or research excerpt, and BioOS will:
-
-- **Extract research objects** including genes, drugs, diseases, pathways, findings, hypotheses, and papers.
-- **Identify relationships** between those objects, such as a drug targeting a gene.
-- **Build a persistent knowledge graph** where information from multiple research excerpts can accumulate.
-- **Reuse existing objects** when the same entity appears across different sources.
-- **Explore connections interactively** by selecting objects and inspecting their summaries and relationships.
-
-### Ask questions over the research graph
-
-<p align="center">
-  <img src="assets/bioos_ask.png" alt="BioOS graph-grounded question answering" width="100%">
-</p>
-
-BioOS also provides a natural-language interface over the accumulated graph. Questions are answered using the research objects and relationships already stored in the workspace, with the relevant graph objects surfaced alongside the answer.
-
-Useful answers can be saved back into the graph as **Findings**, allowing the research workspace to grow as it is explored.
-
-## Why BioOS?
-
-Scientific research is cumulative, but most AI-assisted research workflows are conversational.
-
-A chat interface can help summarize a paper or answer a question, but the useful knowledge generated during that interaction often remains trapped inside the conversation. As more papers are read, researchers must repeatedly reconstruct context, remember connections, and track how genes, drugs, pathways, diseases, and findings relate across sources.
-
-BioOS explores a different model: **research as a persistent graph rather than a sequence of isolated conversations.**
-
-Each imported research excerpt contributes structured objects and relationships to a shared workspace. When an entity appears again, BioOS can reuse the existing object rather than treating it as entirely new information. Over time, individual excerpts become part of a connected representation of the research landscape.
-
-This enables a workflow where researchers can move from:
-
-**reading → extraction → connection → exploration → questioning → new findings**
-
-while preserving the accumulated research context.
-
-## Core Features
-
-- **Scientific entity extraction** — Converts unstructured research text into typed objects such as Genes, Drugs, Diseases, Pathways, Findings, and Hypotheses.
-
-- **Relationship extraction** — Identifies explicit relationships between extracted objects and represents them as graph edges.
-
-- **Persistent research graph** — Accumulates objects and relationships across multiple imports instead of discarding context after each interaction.
-
-- **Entity reuse and deduplication** — Recognizes previously stored entities and reuses them when they appear in new research excerpts.
-
-- **Interactive graph exploration** — Visualizes research objects as a connected graph with type-specific nodes, selectable objects, and relationship inspection.
-
-- **Graph-grounded question answering** — Answers natural-language questions using the objects and relationships present in the research graph.
-
-- **Graph references** — Surfaces the research objects used in an answer so users can trace responses back to graph context.
-
-- **Finding creation** — Allows useful answers generated during exploration to be saved back into the graph as new Findings.
-
-- **Local LLM inference** — Uses Ollama for local model execution, keeping the core extraction and question-answering workflow locally runnable.
-
-- **Evaluation notebooks** — Includes reproducible experiments for entity/relationship extraction and multi-document graph construction.
-
-## How BioOS Works
-
-BioOS uses a simple pipeline that converts scientific text into persistent, queryable research context.
-
-```text
-Scientific Text
-      │
-      ▼
-┌─────────────────┐
-│  React Frontend │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ FastAPI Backend │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Ollama + LLM   │
-└────────┬────────┘
-         │
-         ▼
- Structured Extraction
- ┌───────────────┐
- │ Objects       │
- │ Relationships │
- └───────┬───────┘
-         │
-         ▼
-┌─────────────────┐
-│ Research Graph  │
-└────────┬────────┘
-         │
-         ├──────────────► Interactive Graph Exploration
-         │
-         └──────────────► Graph-Grounded Question Answering
-```
-
-### 1. Import scientific text
-
-The user provides a scientific abstract or research excerpt through the React interface.
-
-### 2. Extract research objects
-
-The FastAPI backend sends the text to a locally running LLM through Ollama. The model converts the unstructured text into structured research objects and relationships.
-
-Objects can include:
-
-`Paper` · `Gene` · `Drug` · `Pathway` · `Disease` · `Finding` · `Hypothesis`
-
-### 3. Build the research graph
-
-Extracted objects are added to the graph. Existing entities can be reused when they appear in later imports, allowing knowledge from multiple excerpts to accumulate rather than creating an isolated graph for every document.
-
-Relationships form edges between objects, producing a connected representation of the imported research.
-
-### 4. Explore the graph
-
-The frontend visualizes the resulting network. Selecting a node reveals its type, summary, and connections while highlighting its local neighborhood in the graph.
-
-### 5. Ask the graph
-
-Users can ask natural-language questions about a selected object and its connected research context.
-
-Rather than answering from an isolated prompt alone, BioOS supplies relevant graph context to the model and surfaces the graph objects referenced in the generated answer.
-
-### 6. Turn answers into research objects
-
-Useful answers can be saved as **Findings**, allowing insights generated during graph exploration to become part of the persistent research workspace.
-
-## Tech Stack
-
-### Frontend
-
-- **React** — component-based user interface
-- **Vite** — frontend development and build tooling
-- **D3.js** — interactive force-directed research graph visualization
-- **JavaScript / CSS** — application logic and interface styling
-
-### Backend
-
-- **FastAPI** — REST API for extraction and graph-grounded question answering
-- **Python** — backend processing and evaluation
-- **Pydantic** — validation of structured research objects, relationships, and API responses
-- **Requests** — communication with the local Ollama server
-
-### Local AI
-
-- **Ollama** — local LLM inference
-- **Gemma 3 4B (`gemma3:4b`)** — biomedical entity/relationship extraction and graph-grounded reasoning
-
-### Evaluation & Analysis
-
-- **Jupyter Notebook**
-- **Pandas**
-- **NetworkX**
-- **Matplotlib**
+> **Research objects → relationships → project graph → graph-grounded intelligence**
 
 ---
 
-## Project Structure
+## What is CompBioGraph?
+
+Computational biology research rarely consists of a single dataset, paper, or analysis.
+
+A typical project contains:
+
+- datasets
+- papers
+- analysis workflows
+- findings
+- hypotheses
+- figures
+- code
+- notes
+- relationships between them
+
+These objects are often scattered across notebooks, documents, folders, and conversations.
+
+CompBioGraph provides a persistent project layer where these research objects can be stored, connected, explored, and queried together.
+
+**BioOS** is the intelligence layer that reasons over this structured research context.
+
+---
+
+## BioOS Intelligence
+
+BioOS provides project-level question answering over the research workspace.
+
+Instead of asking an LLM to reason over an isolated prompt, BioOS receives structured project context containing:
+
+- research objects
+- object types
+- summaries and content
+- relationships between objects
+- the currently selected research context
+
+Answers can reference exact research objects using structured references such as:
+
+```text
+[[GSE38417 Discovery Dataset]]
+[[DMD Age Progression Analysis]]
+```
+
+These references are surfaced in the interface and can be used to navigate directly back to the corresponding research object.
+
+The goal is to keep AI-generated reasoning grounded in the research context already present in the project.
+
+---
+
+# V1.2 — Persistent Research Workspace
+
+The current release extends the original BioOS research-graph prototype into a persistent project workspace.
+
+### Projects
+
+Projects provide a top-level container for a research workflow.
+
+Each project has:
+
+- a name
+- a description
+- a persistent identifier
+- a URL-friendly slug
+- creation and modification timestamps
+
+Projects can be opened directly through routes such as:
+
+```text
+/p/dmd-transcriptomics
+```
+
+### Research Objects
+
+Projects can contain typed research objects including:
+
+```text
+dataset
+paper
+code
+analysis
+finding
+hypothesis
+figure
+note
+```
+
+Each object can contain:
+
+- name
+- type
+- summary
+- detailed content
+- external URL
+- timestamps
+
+### Relationships
+
+Research objects can be connected through explicit relationships such as:
+
+```text
+USED_IN
+DERIVED_FROM
+SUPPORTS
+CONTRADICTS
+RELATES_TO
+```
+
+This creates a project-specific research graph rather than a collection of disconnected records.
+
+### Project Graph
+
+The project dashboard provides an interactive graph visualization of research objects and their relationships.
+
+Selecting an object in the graph can navigate directly to the corresponding research-object card.
+
+### Project Intelligence
+
+BioOS Intelligence can answer questions over the current project's research context.
+
+The interface surfaces referenced research objects as interactive references, allowing users to move between AI-generated answers and the underlying research objects.
+
+---
+
+# Example Project
+
+A DMD transcriptomics project can be represented as:
+
+```text
+GSE38417 Discovery Dataset
+          │
+          │ USED_IN
+          ▼
+DMD Age Progression Analysis
+          │
+          │ SUPPORTS
+          ▼
+Serum Tissue Concordance Hypothesis
+```
+
+Additional relationships can be added as the research project develops.
+
+This allows a project to evolve from a collection of individual research artifacts into a connected representation of the investigation.
+
+---
+
+# Architecture
+
+```text
+                    CompBioGraph
+                         │
+              ┌──────────┴──────────┐
+              │                     │
+        Project Workspace      BioOS Intelligence
+              │                     │
+       Research Objects       Project-grounded QA
+              │                     │
+        Relationships              │
+              │                     │
+              └──────────┬──────────┘
+                         │
+                  Persistent SQLite
+                         │
+                 FastAPI Backend
+                         │
+                 Local Ollama LLM
+```
+
+### Frontend
+
+```text
+React
+  │
+  ├── Project List
+  ├── Project Dashboard
+  ├── Research Object Cards
+  ├── Project Graph
+  └── BioOS Intelligence
+```
+
+### Backend
+
+```text
+FastAPI
+  │
+  ├── Project API
+  ├── Research Object API
+  ├── Relationship API
+  ├── Project Context
+  └── Graph-grounded Reasoning
+```
+
+### Persistence
+
+The current V1.2 implementation uses SQLite for local persistence.
+
+The local database contains:
+
+```text
+projects
+research_objects
+object_relationships
+```
+
+The database is intentionally kept local and is excluded from version control.
+
+---
+
+# Original BioOS Research Graph
+
+The project retains the original BioOS scientific research-graph functionality.
+
+Scientific text can be transformed into structured biomedical objects such as:
+
+```text
+Paper
+Gene
+Drug
+Pathway
+Disease
+Finding
+Hypothesis
+```
+
+These objects can be connected through relationships such as:
+
+```text
+SUPPORTS
+CONTRADICTS
+ASSOCIATED_WITH
+MEASURES
+TARGETS
+PART_OF
+RELATES_TO
+DERIVED_FROM
+```
+
+The resulting graph can be explored interactively and queried using graph-grounded natural-language reasoning.
+
+This functionality forms the scientific graph foundation underneath the newer project workspace.
+
+---
+
+# Why a Research Workspace?
+
+Scientific knowledge is cumulative.
+
+A single paper may provide a dataset, another may provide an analysis method, and a later experiment may produce a finding that changes how the earlier evidence is interpreted.
+
+Traditional chat-based workflows often lose these connections.
+
+CompBioGraph instead treats research as a collection of persistent objects:
+
+```text
+dataset
+   ↓
+analysis
+   ↓
+finding
+   ↓
+hypothesis
+   ↓
+new analysis
+```
+
+The resulting structure can remain available throughout the lifetime of the research project.
+
+---
+
+# Tech Stack
+
+## Frontend
+
+- **React**
+- **Vite**
+- **D3.js**
+- **JavaScript**
+- **CSS**
+
+## Backend
+
+- **FastAPI**
+- **Python**
+- **Pydantic**
+- **SQLite**
+- **Requests**
+
+## Local AI
+
+- **Ollama**
+- **Gemma 3 4B (`gemma3:4b`)**
+
+The local model is used for graph-grounded reasoning and the original scientific extraction workflow.
+
+---
+
+# Project Structure
 
 ```text
 BioOS/
 │
 ├── backend/
 │   ├── app.py
+│   ├── database.py
 │   ├── extraction.py
+│   ├── objects.py
+│   ├── project_context.py
+│   ├── projects.py
 │   ├── reasoning.py
+│   ├── relationships.py
 │   ├── retrieval.py
 │   └── schemas.py
 │
 ├── frontend/
-│   ├── src/
-│   │   ├── api/
-│   │   ├── components/
-│   │   ├── app.jsx
-│   │   └── main.jsx
-│   ├── index.html
-│   ├── package.json
-│   └── vite.config.js
+│   └── src/
+│       ├── api/
+│       │   └── bioos.js
+│       │
+│       ├── components/
+│       │   ├── AddObjectForm.jsx
+│       │   ├── AddRelationshipForm.jsx
+│       │   ├── ProjectDashboard.jsx
+│       │   ├── ProjectGraph.jsx
+│       │   ├── ProjectIntelligence.jsx
+│       │   ├── ProjectList.jsx
+│       │   └── ...
+│       │
+│       ├── graph/
+│       ├── app.jsx
+│       ├── main.jsx
+│       └── styles.css
 │
 ├── notebooks/
-│   ├── 01_bioos_evaluation.ipynb
-│   └── 02_research_graph_demo.ipynb
-│
 ├── examples/
-│   └── sample_research_notes.md
-│
 ├── assets/
-│   ├── bioos_graph.png
-│   └── bioos_ask.png
 │
 ├── .env.example
 ├── .gitignore
@@ -214,99 +351,90 @@ BioOS/
 └── README.md
 ```
 
-### Repository Components
+---
 
-**`backend/`** contains the FastAPI application, structured extraction pipeline, graph-context retrieval logic, response schemas, and local LLM reasoning layer.
+# Installation
 
-**`frontend/`** contains the React application used to import research text, visualize the accumulated graph, inspect research objects, and ask graph-grounded questions.
+## Prerequisites
 
-**`notebooks/`** contains reproducible evaluation and demonstration workflows. The first notebook evaluates extraction performance, while the second demonstrates multi-excerpt graph accumulation and grounded question answering.
+Install:
 
-**`examples/`** provides sample scientific text that can be used to test BioOS without sourcing additional material.
+- Python 3.10+
+- Node.js
+- npm
+- Ollama
+- Git
 
-**`assets/`** contains screenshots used to document the BioOS interface and workflow.
+---
 
-## Installation & Setup
-
-BioOS runs locally using a FastAPI backend, React/Vite frontend, and an Ollama-hosted language model.
-
-### Prerequisites
-
-Make sure the following are installed:
-
-- **Python 3.10+**
-- **Node.js and npm**
-- **Ollama**
-- **Git**
-
-### 1. Clone the repository
+## 1. Clone the repository
 
 ```bash
 git clone https://github.com/riapatil05/BioOS.git
 cd BioOS
 ```
 
-Replace `<YOUR-BIOOS-GITHUB-URL>` with the repository URL after publishing the project.
+---
 
-### 2. Create a Python virtual environment
+## 2. Create a Python environment
 
-From the BioOS root directory:
-
-**Windows**
+### Windows
 
 ```powershell
 py -m venv .venv
 .venv\Scripts\activate
 ```
 
-**macOS / Linux**
+### macOS / Linux
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### 3. Install backend dependencies
+---
+
+## 3. Install backend dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Install and prepare Ollama
+---
 
-BioOS uses a locally running Ollama model for extraction and graph-grounded reasoning.
+## 4. Install Ollama model
 
-Pull the default model:
+BioOS uses Ollama for local model inference.
 
 ```bash
 ollama pull gemma3:4b
 ```
 
-Verify that the model is available:
+Verify:
 
 ```bash
 ollama list
 ```
 
-BioOS uses `gemma3:4b` by default, but the model can be changed through the environment configuration.
+---
 
-### 5. Configure environment variables
+## 5. Configure environment
 
-Copy the provided environment template:
+Copy the environment template.
 
-**Windows PowerShell**
+### Windows PowerShell
 
 ```powershell
 Copy-Item .env.example .env
 ```
 
-**macOS / Linux**
+### macOS / Linux
 
 ```bash
 cp .env.example .env
 ```
 
-The default configuration is:
+Default configuration:
 
 ```dotenv
 BIOOS_HOST=127.0.0.1
@@ -318,383 +446,261 @@ OLLAMA_MODEL=gemma3:4b
 VITE_API_BASE_URL=http://127.0.0.1:8000
 ```
 
-The `.env` file contains the local configuration and is excluded from version control. `.env.example` provides the configuration template used by the repository.
+The `.env` file is excluded from Git.
 
-### 6. Start the backend
+---
 
-Open a terminal and navigate to the backend directory:
+# Running the Application
 
-```bash
+## Start the backend
+
+From the project root:
+
+```powershell
 cd backend
-```
-
-Start the FastAPI development server:
-
-```bash
 python -m uvicorn app:app --reload
 ```
 
-On Windows, this can also be run with:
+If Windows does not resolve `python` correctly:
 
 ```powershell
 py -m uvicorn app:app --reload
 ```
 
-The backend will be available at:
+The API will be available at:
 
 ```text
 http://127.0.0.1:8000
 ```
 
-FastAPI's interactive API documentation is available at:
+Interactive API documentation:
 
 ```text
 http://127.0.0.1:8000/docs
 ```
 
-Keep this terminal running.
+---
 
-### 7. Install frontend dependencies
+## Start the frontend
 
-Open a second terminal and navigate to the frontend directory:
-
-```bash
-cd frontend
-```
-
-Install the dependencies:
-
-```bash
-npm install
-```
-
-If Windows PowerShell prevents `npm.ps1` from running because of the local execution policy, use:
+Open a second terminal:
 
 ```powershell
-npm.cmd install
-```
-
-### 8. Start the frontend
-
-```bash
+cd frontend
+npm install
 npm run dev
 ```
 
-Or, when using `npm.cmd` on Windows:
+If PowerShell blocks `npm.ps1`:
 
 ```powershell
+npm.cmd install
 npm.cmd run dev
 ```
 
-Vite will display the local development URL, typically:
+The frontend will normally be available at:
 
 ```text
 http://localhost:5173
 ```
 
-Open this address in your browser to launch BioOS.
+---
 
-### 9. Test the application
+# API Overview
 
-Paste a scientific excerpt into the import panel, for example:
+The backend exposes APIs for both the original scientific graph and the persistent project workspace.
+
+## Scientific Graph
+
+### Extract research objects
 
 ```text
-Duchenne muscular dystrophy is caused by loss of dystrophin. DMD skeletal muscle shows increased expression of SPP1 and COL1A1. SPP1 is associated with inflammatory and fibrotic remodeling.
+POST /api/extract
 ```
-
-Run the extraction and inspect the resulting research objects in the graph.
-
-You can then select an object and use **Ask BioOS** to query the graph-grounded research context.
-
-> **Note:** BioOS performs inference locally. Extraction and question-answering latency therefore depends on the selected Ollama model and available hardware.
-
-## API
-
-BioOS exposes a small REST API through FastAPI. Interactive documentation is available at `http://127.0.0.1:8000/docs` while the backend is running.
-
-### Extract Research Objects
-
-**`POST /api/extract`**
 
 Converts scientific text into structured biomedical objects and relationships.
 
-#### Example request
+### Ask the research graph
 
-```json
-{
-  "text": "Duchenne muscular dystrophy is caused by loss of dystrophin. DMD skeletal muscle shows increased expression of SPP1 and COL1A1. SPP1 is associated with inflammatory and fibrotic remodeling."
-}
+```text
+POST /api/ask
 ```
 
-#### Example response
-
-```json
-{
-  "title": "DMD Pathology and SPP1 Expression",
-  "objects": [
-    {
-      "tempId": "o1",
-      "type": "Disease",
-      "name": "Duchenne muscular dystrophy",
-      "summary": "A genetic disorder characterized by progressive muscle degeneration."
-    },
-    {
-      "tempId": "o2",
-      "type": "Gene",
-      "name": "dystrophin",
-      "summary": "A protein essential for maintaining muscle cell integrity."
-    },
-    {
-      "tempId": "o3",
-      "type": "Gene",
-      "name": "SPP1",
-      "summary": "A gene associated with inflammatory and fibrotic processes."
-    },
-    {
-      "tempId": "o4",
-      "type": "Gene",
-      "name": "COL1A1",
-      "summary": "A gene encoding a major component of connective tissue."
-    }
-  ],
-  "relationships": [
-    {
-      "from": "o3",
-      "to": "o1",
-      "type": "ASSOCIATED_WITH"
-    }
-  ]
-}
-```
-
-The extraction API identifies the following object types from scientific text:
-
-`Gene` · `Drug` · `Pathway` · `Finding` · `Hypothesis` · `Disease`
-
-Each imported excerpt is additionally represented in the research graph as a `Paper` object, providing a source node that connects extracted research objects to their originating text.
-
-Supported relationship types include:
-
-`SUPPORTS` · `CONTRADICTS` · `ASSOCIATED_WITH` · `MEASURES` · `TARGETS` · `PART_OF`
+Answers questions using supplied graph context.
 
 ---
 
-### Ask the Research Graph
+## Project Workspace
 
-**`POST /api/ask`**
-
-Answers a natural-language question using the supplied research graph as context.
-
-#### Example request
-
-```json
-{
-  "question": "What is SPP1 associated with?",
-  "nodes": [
-    {
-      "id": "n1",
-      "type": "Gene",
-      "name": "SPP1",
-      "summary": "SPP1 expression is increased in DMD skeletal muscle."
-    },
-    {
-      "id": "n2",
-      "type": "Pathway",
-      "name": "Fibrotic remodeling",
-      "summary": "Extracellular matrix remodeling observed in DMD skeletal muscle."
-    },
-    {
-      "id": "n3",
-      "type": "Disease",
-      "name": "Duchenne muscular dystrophy",
-      "summary": "A progressive muscle disease caused by loss of dystrophin."
-    }
-  ],
-  "edges": [
-    {
-      "id": "e1",
-      "source": "n1",
-      "target": "n2",
-      "type": "ASSOCIATED_WITH"
-    },
-    {
-      "id": "e2",
-      "source": "n1",
-      "target": "n3",
-      "type": "ASSOCIATED_WITH"
-    }
-  ],
-  "selected_node_id": "n1"
-}
-```
-
-#### Example response
-
-```json
-{
-  "answer": "According to the research graph, [[SPP1]] is associated with [[Fibrotic remodeling]] and [[Duchenne muscular dystrophy]].",
-  "referenced": [
-    "SPP1",
-    "Fibrotic remodeling",
-    "Duchenne muscular dystrophy"
-  ]
-}
-```
-
-The reasoning model is instructed to answer only from the supplied graph context. Object names referenced in an answer are returned separately in `referenced`, allowing the frontend to connect generated answers back to research objects.
-
-## Evaluation
-
-BioOS includes a lightweight evaluation suite in [`notebooks/01_bioos_evaluation.ipynb`](notebooks/01_bioos_evaluation.ipynb) to measure the behavior of the local extraction pipeline.
-
-The benchmark uses manually curated biomedical excerpts containing expected genes, drugs, diseases, pathways, and relationships.
-
-### Entity Extraction
-
-| Metric | Score |
-|---|---:|
-| Precision | **1.000** |
-| Recall | **0.692** |
-| F1 Score | **0.818** |
-
-Performance varied substantially across biomedical object types:
-
-| Object Type | Precision | Recall | F1 |
-|---|---:|---:|---:|
-| Gene | 1.000 | 1.000 | 1.000 |
-| Drug | 1.000 | 1.000 | 1.000 |
-| Pathway | 1.000 | 0.400 | 0.571 |
-| Disease | 1.000 | 0.167 | 0.286 |
-
-The baseline extractor showed **high precision but conservative recall**. Genes and drugs were recovered reliably in the benchmark, while diseases and pathways accounted for all observed entity false negatives.
-
-No unexpected entities were produced in the evaluated cases.
-
-### Relationship Extraction
-
-A separate set of explicit biomedical relationships was used to evaluate graph-edge extraction.
-
-| Metric | Score |
-|---|---:|
-| Precision | **1.000** |
-| Recall | **0.800** |
-| F1 Score | **0.889** |
-
-Four of five expected relationships were recovered.
-
-The single missed relationship was:
+### Projects
 
 ```text
-PIK3CA → ACTIVATES → PI3K-AKT signaling pathway
+GET    /api/projects
+POST   /api/projects
+GET    /api/projects/{project_id}
+PUT    /api/projects/{project_id}
+DELETE /api/projects/{project_id}
 ```
 
-Failure analysis showed that `PIK3CA` was extracted but the `PI3K-AKT signaling pathway` object was not. The missing edge was therefore caused by an **upstream entity-extraction failure**, rather than an incorrect relationship classification.
+### Research Objects
 
-### What the evaluation revealed
+```text
+GET    /api/projects/{project_id}/objects
+POST   /api/projects/{project_id}/objects
+GET    /api/projects/{project_id}/objects/{object_id}
+PUT    /api/projects/{project_id}/objects/{object_id}
+DELETE /api/projects/{project_id}/objects/{object_id}
+```
 
-The current prototype favors precision over graph completeness. This is a useful property for a research graph, where unsupported objects and relationships can be particularly misleading, but low recall also limits how connected the resulting graph can become.
+### Relationships
 
-The most important current extraction weakness is the recognition of **Disease** and **Pathway** objects. Improving entity recall in these categories would also improve downstream relationship coverage and graph connectivity.
+```text
+GET    /api/projects/{project_id}/relationships
+POST   /api/projects/{project_id}/relationships
+DELETE /api/projects/{project_id}/relationships/{relationship_id}
+```
 
-> **Note:** This is a small, manually curated engineering benchmark designed to characterize the current prototype. The reported metrics should not be interpreted as performance on a comprehensive biomedical information-extraction benchmark.
+### Project Context
+
+```text
+GET /api/projects/{project_id}/context
+```
+
+Returns the structured research context used by BioOS Intelligence.
 
 ---
 
-## End-to-End Research Graph Demonstration
+# Example Workflow
 
-[`notebooks/02_research_graph_demo.ipynb`](notebooks/02_research_graph_demo.ipynb) demonstrates the complete BioOS workflow across multiple scientific excerpts.
-
-Five related excerpts were processed independently and accumulated into a shared research graph:
+A typical workflow can look like:
 
 ```text
-Scientific excerpts
-        ↓
-Structured extraction
-        ↓
-Entity resolution
-        ↓
-Persistent research graph
-        ↓
-Graph-grounded question answering
+Create Project
+      ↓
+Add Dataset
+      ↓
+Add Analysis
+      ↓
+Add Finding / Hypothesis
+      ↓
+Connect Research Objects
+      ↓
+Explore Project Graph
+      ↓
+Ask BioOS
+      ↓
+Navigate from AI references
+      ↓
+Update the research workspace
 ```
 
-Across the demonstration, **7 extracted object mentions were resolved into 6 unique persistent research objects**.
+For example:
 
-`PIK3CA` appeared independently in two excerpts and was correctly reused as a single persistent node while retaining both sources as provenance.
+```text
+Project
+└── DMD Transcriptomics
+    │
+    ├── Dataset
+    │   └── GSE38417 Discovery Dataset
+    │
+    ├── Analysis
+    │   └── DMD Age Progression Analysis
+    │
+    └── Hypothesis
+        └── Serum Tissue Concordance Hypothesis
+```
 
-The accumulated graph was then queried with:
+---
 
-> **What drug in the research graph targets PIK3CA?**
+# Evaluation
 
-BioOS returned:
+The repository also contains the original BioOS evaluation notebooks covering:
 
-> The research graph indicates that [[Alpelisib]] targets [[PIK3CA]].
+- biomedical entity extraction
+- relationship extraction
+- multi-document graph construction
+- graph-grounded question answering
 
-Both referenced objects were present in the supplied graph context, demonstrating the full pipeline from independent scientific excerpts to accumulated, queryable research knowledge.
+The original prototype evaluation demonstrated high precision on the manually curated benchmark while showing lower recall for some object categories, particularly diseases and pathways.
 
-## Current Limitations
+These experiments are intended as engineering evaluations of the prototype rather than comprehensive biomedical benchmarks.
 
-BioOS is currently a prototype designed to explore persistent graph-based research workflows with local language models. Several limitations remain.
+---
 
-### Extraction recall
+# Current Limitations
 
-The current `gemma3:4b` extraction pipeline is conservative. Evaluation showed strong extraction of genes and drugs but substantially lower recall for diseases and pathways.
+CompBioGraph/BioOS is a research prototype.
 
-Because relationships can only be created between successfully extracted objects, missed entities also reduce downstream graph connectivity.
+### Local model dependency
+
+Reasoning quality and latency depend on the selected Ollama model and available hardware.
 
 ### Entity resolution
 
-Entity reuse currently relies primarily on normalized object names and types. This handles exact repeated entities such as `PIK3CA`, but does not fully resolve aliases, synonyms, abbreviations, or ontology-equivalent concepts.
+The scientific extraction layer does not yet provide comprehensive ontology-aware resolution of aliases, synonyms, and identifiers.
 
-For example, a production system should be able to determine when different surface forms refer to the same biomedical concept.
+### Evidence validation
 
-### Local model limitations
+BioOS grounds its answers in the research context supplied to it but does not independently validate scientific claims against external biomedical databases.
 
-BioOS intentionally uses a relatively small locally hosted language model to keep the application accessible and local-first.
+### Provenance
 
-Extraction quality and inference latency therefore depend on the selected Ollama model and available hardware. More capable models may improve extraction and reasoning at the cost of additional computational requirements.
+The project workspace currently stores structured research objects and relationships, but richer provenance linking every claim to specific source passages remains an area for future development.
 
-### Graph persistence
+### Scale
 
-The current prototype focuses on the research-graph workflow itself rather than a production graph database. A larger deployment would benefit from durable graph storage, indexing, richer provenance tracking, and scalable retrieval.
-
-### Biomedical validation
-
-Extracted claims are grounded in user-provided research text, but BioOS does not currently perform external verification against biomedical databases or ontologies.
-
-Researchers should therefore treat extracted objects and generated findings as research-assistance outputs rather than independently validated scientific evidence.
+SQLite provides a simple local persistence layer for the current prototype. Larger research deployments may require more specialized storage and retrieval infrastructure.
 
 ---
 
-## Future Work
+# Roadmap
 
-Several extensions could turn the current prototype into a more capable biomedical research workspace:
+Potential future directions include:
 
-- **Ontology-aware entity resolution** using resources such as HGNC, MeSH, Disease Ontology, ChEBI, or UniProt identifiers.
-- **Improved disease and pathway extraction** through prompt refinement, model comparison, or specialized biomedical information-extraction models.
-- **Persistent graph storage** using a graph database or dedicated graph persistence layer.
-- **Richer provenance tracking** linking individual objects and relationships to their originating papers, excerpts, and evidence.
-- **PDF and literature ingestion** for extracting research objects directly from scientific papers.
-- **Semantic graph retrieval** for finding relevant research objects beyond immediate graph neighbors.
-- **Contradiction and evidence tracking** to represent conflicting findings across papers.
-- **Graph-assisted hypothesis generation** using accumulated findings and relationships while preserving evidence provenance.
-- **Larger biomedical benchmarks** for systematic evaluation of entity extraction, relationship extraction, and grounded question answering.
-
-The long-term goal is not to replace scientific reading or judgment, but to provide a structured layer where research knowledge can **persist, connect, and remain queryable as the literature grows**.
+- ontology-aware biomedical entity resolution
+- richer dataset and paper ingestion
+- PDF/literature ingestion
+- source-level provenance tracking
+- semantic research-object retrieval
+- evidence and contradiction tracking
+- automated research-object creation from analyses
+- graph-assisted hypothesis generation
+- larger biomedical evaluation benchmarks
+- scalable graph storage
+- collaborative research workspaces
 
 ---
 
-## Author
+# Design Philosophy
+
+CompBioGraph is not intended to replace scientific reading, analysis, or judgment.
+
+The goal is to provide a persistent computational layer around research so that important objects, relationships, findings, and hypotheses can remain connected and queryable throughout a project.
+
+> **Research should not disappear when the conversation ends.**
+
+---
+
+# Author
 
 **Ria Patil**
 
 B.Tech, Pharmaceutical Engineering and Technology  
 Indian Institute of Technology (BHU), Varanasi
 
-BioOS was built as an exploration of local language models, biomedical information extraction, knowledge graphs, and graph-grounded research workflows.
+CompBioGraph/BioOS was developed as an exploration of:
+
+- computational biology
+- biomedical information extraction
+- knowledge graphs
+- persistent research infrastructure
+- local language models
+- graph-grounded reasoning
 
 ---
 
-## License
+# License
 
-This project is licensed under the MIT License. See [`LICENSE`](LICENSE) for details.
+This project is licensed under the MIT License.
+
+See [`LICENSE`](LICENSE) for details.

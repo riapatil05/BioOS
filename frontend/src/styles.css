@@ -824,3 +824,2359 @@ button:disabled {
     padding-right: 18px;
   }
 }
+
+/* ============================================================
+   PROJECT DASHBOARD
+   ============================================================ */
+
+.project-dashboard {
+  min-height: 100vh;
+  padding: 32px;
+  background: #080c14;
+  color: #e5e7eb;
+}
+
+/* ------------------------------------------------------------
+   Header
+   ------------------------------------------------------------ */
+
+.dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #202838;
+}
+
+.dashboard-header-left {
+  min-width: 0;
+}
+
+.dashboard-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 7px 12px;
+  border: 1px solid #202838;
+  border-radius: 7px;
+  background: #0b111d;
+  color: #7f8ba3;
+  font-size: 13px;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.dashboard-back-button:hover {
+  background: #111827;
+  border-color: #334155;
+  color: #e5e7eb;
+}
+
+.dashboard-eyebrow {
+  margin-bottom: 6px;
+  color: #7f8ba3;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dashboard-title {
+  margin: 0;
+  color: #e5e7eb;
+  font-size: 30px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.dashboard-description {
+  max-width: 720px;
+  margin: 10px 0 0;
+  color: #7f8ba3;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------
+   Stats
+   ------------------------------------------------------------ */
+
+.dashboard-stats {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.dashboard-stat {
+  min-width: 100px;
+  padding: 14px 16px;
+  border: 1px solid #202838;
+  border-radius: 9px;
+  background: #0b111d;
+}
+
+.dashboard-stat-value {
+  margin-bottom: 4px;
+  color: #e5e7eb;
+  font-size: 20px;
+  font-weight: 650;
+}
+
+.dashboard-stat-label {
+  color: #7f8ba3;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ------------------------------------------------------------
+   Dashboard Sections
+   ------------------------------------------------------------ */
+
+.dashboard-section {
+  margin-bottom: 36px;
+}
+
+.dashboard-section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.dashboard-section-title {
+  margin: 0;
+  color: #e5e7eb;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dashboard-section-subtitle {
+  color: #7f8ba3;
+  font-size: 12px;
+}
+
+/* ------------------------------------------------------------
+   Research Objects
+   ------------------------------------------------------------ */
+
+.object-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.object-card {
+  padding: 18px;
+  border: 1px solid #202838;
+  border-radius: 10px;
+  background: #0b111d;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.object-card:hover {
+  border-color: #334155;
+  background: #0e1624;
+  transform: translateY(-1px);
+}
+
+.object-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.object-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #7f8ba3;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+}
+
+.object-type-symbol {
+  color: #aeb9cc;
+  font-size: 13px;
+}
+
+.object-name {
+  margin: 0 0 8px;
+  color: #e5e7eb;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.object-summary {
+  margin: 0;
+  color: #7f8ba3;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.object-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 14px;
+  color: #aeb9cc;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.object-link:hover {
+  color: #e5e7eb;
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------------
+   Relationships
+   ------------------------------------------------------------ */
+
+.relationship-list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #202838;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0b111d;
+}
+
+.relationship-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  border-bottom: 1px solid #202838;
+}
+
+.relationship-row:last-child {
+  border-bottom: none;
+}
+
+.relationship-object {
+  min-width: 0;
+}
+
+.relationship-object-type {
+  margin-bottom: 3px;
+  color: #7f8ba3;
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.relationship-object-name {
+  overflow: hidden;
+  color: #e5e7eb;
+  font-size: 13px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.relationship-type {
+  padding: 5px 9px;
+  border: 1px solid #202838;
+  border-radius: 6px;
+  background: #080c14;
+  color: #7f8ba3;
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.relationship-arrow {
+  color: #7f8ba3;
+  font-size: 13px;
+}
+
+/* ------------------------------------------------------------
+   Empty / Loading / Error States
+   ------------------------------------------------------------ */
+
+.dashboard-loading,
+.dashboard-error,
+.dashboard-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  padding: 32px;
+  border: 1px solid #202838;
+  border-radius: 10px;
+  background: #0b111d;
+  color: #7f8ba3;
+  text-align: center;
+  font-size: 14px;
+}
+
+.dashboard-error {
+  color: #e5e7eb;
+}
+
+/* ------------------------------------------------------------
+   Responsive
+   ------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  .project-dashboard {
+    padding: 24px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+  }
+
+  .dashboard-stats {
+    width: 100%;
+  }
+
+  .dashboard-stat {
+    flex: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-dashboard {
+    padding: 18px;
+  }
+
+  .dashboard-title {
+    font-size: 24px;
+  }
+
+  .dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .relationship-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .relationship-type {
+    justify-self: start;
+  }
+
+  .relationship-arrow {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   PROJECT LIST
+   ========================================================================== */
+
+.project-list-page {
+  min-height: 100vh;
+  padding: 42px 48px 64px;
+  background: #080c14;
+  color: #e5e7eb;
+}
+
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+
+.project-list-header {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-bottom: 42px;
+  border-bottom: 1px solid #202838;
+}
+
+.project-eyebrow {
+  margin-bottom: 14px;
+  color: #7484f5;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.project-list-title {
+  margin: 0;
+  color: #edf1f7;
+  font-size: 42px;
+  line-height: 1.1;
+  font-weight: 650;
+  letter-spacing: -1px;
+}
+
+.project-list-subtitle {
+  max-width: 720px;
+  margin: 14px 0 0;
+  color: #7f8ba3;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+
+/* --------------------------------------------------------------------------
+   Main content
+   -------------------------------------------------------------------------- */
+
+.project-list-content {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+
+/* --------------------------------------------------------------------------
+   Create Project
+   -------------------------------------------------------------------------- */
+
+.create-project-card {
+  margin-top: 34px;
+  padding: 22px;
+  border: 1px solid #202838;
+  border-radius: 10px;
+  background: #0b111d;
+}
+
+.create-project-card form {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(300px, 1.5fr) auto;
+  gap: 10px;
+  align-items: start;
+  margin-top: 14px;
+}
+
+.project-input,
+.project-textarea {
+  width: 100%;
+  box-sizing: border-box;
+
+  border: 1px solid #293246;
+  border-radius: 7px;
+
+  outline: none;
+
+  background: #080c14;
+  color: #e5e7eb;
+
+  font-size: 13px;
+
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.project-input {
+  height: 44px;
+  padding: 0 13px;
+}
+
+.project-textarea {
+  min-height: 44px;
+  padding: 10px 13px;
+  resize: vertical;
+  line-height: 1.45;
+}
+
+.project-input::placeholder,
+.project-textarea::placeholder {
+  color: #596579;
+}
+
+.project-input:focus,
+.project-textarea:focus {
+  border-color: #6575e8;
+
+  box-shadow:
+    0 0 0 3px rgba(101, 117, 232, 0.09);
+}
+
+
+/* --------------------------------------------------------------------------
+   Primary button
+   -------------------------------------------------------------------------- */
+
+.project-primary-button {
+  height: 44px;
+  padding: 0 17px;
+
+  border: 1px solid #6575e8;
+  border-radius: 7px;
+
+  background: #5363d9;
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    transform 120ms ease;
+}
+
+.project-primary-button:hover:not(:disabled) {
+  background: #6575e8;
+  border-color: #7484f5;
+}
+
+.project-primary-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+
+/* --------------------------------------------------------------------------
+   Projects section
+   -------------------------------------------------------------------------- */
+
+.projects-section {
+  margin-top: 38px;
+}
+
+.projects-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-bottom: 14px;
+}
+
+
+/* --------------------------------------------------------------------------
+   Refresh button
+   -------------------------------------------------------------------------- */
+
+.project-refresh-button {
+  padding: 6px 10px;
+
+  border: 1px solid #293246;
+  border-radius: 6px;
+
+  background: transparent;
+  color: #8793a6;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.project-refresh-button:hover:not(:disabled) {
+  border-color: #5665c8;
+  color: #b3bcff;
+}
+
+
+/* --------------------------------------------------------------------------
+   Errors / Empty state
+   -------------------------------------------------------------------------- */
+
+.project-error {
+  margin-bottom: 14px;
+  padding: 10px 12px;
+
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  border-radius: 7px;
+
+  background: rgba(127, 29, 29, 0.15);
+  color: #fca5a5;
+
+  font-size: 12px;
+}
+
+.project-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 180px;
+  padding: 32px;
+
+  border: 1px solid #202838;
+  border-radius: 10px;
+
+  background: #0b111d;
+  color: #596579;
+
+  text-align: center;
+  font-size: 13px;
+}
+
+.project-empty-state strong {
+  margin-bottom: 7px;
+  color: #aeb8c9;
+}
+
+
+/* --------------------------------------------------------------------------
+   Project grid
+   -------------------------------------------------------------------------- */
+
+.project-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(300px, 1fr));
+
+  gap: 14px;
+}
+
+
+/* --------------------------------------------------------------------------
+   Project card
+   -------------------------------------------------------------------------- */
+
+.project-card {
+  width: 100%;
+  min-height: 210px;
+
+  display: block;
+
+  padding: 20px;
+
+  border: 1px solid #202838;
+  border-radius: 10px;
+
+  background: #0b111d;
+  color: #e5e7eb;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    transform 150ms ease,
+    box-shadow 150ms ease;
+
+  /* Important because this is a <button> */
+  font: inherit;
+  appearance: none;
+}
+
+.project-card:hover {
+  border-color: #3a465d;
+  background: #0e1624;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.22);
+}
+
+.project-card:focus-visible {
+  outline: 2px solid #6575e8;
+  outline-offset: 2px;
+}
+
+
+/* --------------------------------------------------------------------------
+   Project card contents
+   -------------------------------------------------------------------------- */
+
+.project-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 34px;
+}
+
+.project-card-type {
+  color: #68758a;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.project-card-arrow {
+  color: #68758a;
+  font-size: 15px;
+
+  transition:
+    color 120ms ease,
+    transform 120ms ease;
+}
+
+.project-card:hover .project-card-arrow {
+  color: #aeb8c9;
+  transform: translateX(3px);
+}
+
+.project-card h2 {
+  margin: 0 0 10px;
+
+  color: #edf1f7;
+
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.project-card p {
+  min-height: 42px;
+
+  margin: 0;
+
+  color: #7f8ba3;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.project-card-meta {
+  margin-top: 24px;
+
+  color: #596579;
+
+  font-family:
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 10px;
+}
+
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 850px) {
+  .project-list-page {
+    padding: 30px 20px 48px;
+  }
+
+  .project-list-title {
+    font-size: 34px;
+  }
+
+  .create-project-card form {
+    grid-template-columns: 1fr;
+  }
+
+  .project-primary-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-list-title {
+    font-size: 29px;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   PROJECT GRAPH
+   ========================================================================== */
+
+.project-graph-section {
+  margin-top: 36px;
+}
+
+.project-graph-container {
+  width: 100%;
+  height: 520px;
+
+  overflow: hidden;
+
+  border: 1px solid #202838;
+  border-radius: 10px;
+
+  background: #0b111d;
+}
+
+.project-graph {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
+
+.project-graph-link {
+  pointer-events: none;
+}
+
+.project-graph-link-label {
+  fill: #68758a;
+
+  font-size: 9px;
+  font-weight: 650;
+
+  letter-spacing: 0.08em;
+}
+
+.project-graph-node-name {
+  fill: #e5e7eb;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.project-graph-node-type {
+  fill: #596579;
+
+  font-size: 8px;
+  font-weight: 650;
+
+  letter-spacing: 0.08em;
+}
+
+/* ==========================================================================
+   ADD RESEARCH OBJECT
+   ========================================================================== */
+
+.dashboard-add-object-button {
+  padding: 8px 12px;
+
+  border: 1px solid #5363d9;
+  border-radius: 7px;
+
+  background: #5363d9;
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+}
+
+.dashboard-add-object-button:hover {
+  background: #6575e8;
+  border-color: #6575e8;
+}
+
+
+.add-object-card {
+  margin-bottom: 20px;
+  padding: 22px;
+
+  border: 1px solid #293246;
+  border-radius: 10px;
+
+  background: #0b111d;
+}
+
+
+.add-object-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+}
+
+
+.add-object-header h3 {
+  margin: 8px 0 5px;
+
+  color: #e5e7eb;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+
+.add-object-header p {
+  margin: 0;
+
+  color: #7f8ba3;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+.add-object-cancel-button {
+  padding: 6px 10px;
+
+  border: 1px solid #293246;
+  border-radius: 6px;
+
+  background: transparent;
+  color: #7f8ba3;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+
+.add-object-cancel-button:hover {
+  border-color: #566176;
+  color: #e5e7eb;
+}
+
+
+.add-object-form {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+
+.add-object-field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+
+.add-object-field-full {
+  grid-column: 1 / -1;
+}
+
+
+.add-object-field label {
+  color: #8793a6;
+
+  font-size: 10px;
+  font-weight: 650;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+.add-object-field input,
+.add-object-field textarea,
+.add-object-field select {
+  box-sizing: border-box;
+
+  width: 100%;
+
+  padding: 10px 12px;
+
+  border: 1px solid #293246;
+  border-radius: 7px;
+
+  outline: none;
+
+  background: #080c14;
+  color: #e5e7eb;
+
+  font: inherit;
+  font-size: 13px;
+}
+
+
+.add-object-field input,
+.add-object-field select {
+  height: 42px;
+}
+
+
+.add-object-field textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+
+.add-object-field input::placeholder,
+.add-object-field textarea::placeholder {
+  color: #596579;
+}
+
+
+.add-object-field input:focus,
+.add-object-field textarea:focus,
+.add-object-field select:focus {
+  border-color: #6575e8;
+
+  box-shadow:
+    0 0 0 3px rgba(101, 117, 232, 0.09);
+}
+
+
+.add-object-error {
+  grid-column: 1 / -1;
+
+  padding: 9px 11px;
+
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  border-radius: 7px;
+
+  background: rgba(127, 29, 29, 0.15);
+
+  color: #fca5a5;
+
+  font-size: 12px;
+}
+
+
+.add-object-actions {
+  grid-column: 1 / -1;
+
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 8px;
+
+  padding-top: 4px;
+}
+
+
+.add-object-secondary-button,
+.add-object-primary-button {
+  height: 38px;
+
+  padding: 0 14px;
+
+  border-radius: 7px;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+.add-object-secondary-button {
+  border: 1px solid #293246;
+
+  background: transparent;
+  color: #8793a6;
+}
+
+
+.add-object-secondary-button:hover {
+  border-color: #566176;
+  color: #e5e7eb;
+}
+
+
+.add-object-primary-button {
+  border: 1px solid #5363d9;
+
+  background: #5363d9;
+  color: #ffffff;
+}
+
+
+.add-object-primary-button:hover:not(:disabled) {
+  background: #6575e8;
+  border-color: #6575e8;
+}
+
+
+.add-object-primary-button:disabled,
+.add-object-secondary-button:disabled,
+.add-object-cancel-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+@media (max-width: 750px) {
+  .add-object-form {
+    grid-template-columns: 1fr;
+  }
+
+  .add-object-field-full {
+    grid-column: auto;
+  }
+
+  .add-object-actions {
+    grid-column: auto;
+  }
+
+  .dashboard-section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+/* ==========================================================================
+   RESEARCH OBJECT RELATIONSHIPS
+   ========================================================================== */
+
+.relationship-form-card {
+  margin-bottom: 20px;
+  padding: 22px;
+  border: 1px solid #293246;
+  border-radius: 10px;
+  background: #0b111d;
+}
+
+.relationship-form-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.relationship-form-header h3 {
+  margin: 8px 0 5px;
+  color: #e5e7eb;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.relationship-form-header p {
+  margin: 0;
+  color: #7f8ba3;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.relationship-cancel-button {
+  padding: 6px 10px;
+  border: 1px solid #293246;
+  border-radius: 6px;
+  background: transparent;
+  color: #7f8ba3;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.relationship-cancel-button:hover {
+  border-color: #566176;
+  color: #e5e7eb;
+}
+
+.relationship-form {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(150px, 0.6fr)
+    minmax(0, 1fr);
+  gap: 14px;
+  align-items: end;
+}
+
+.relationship-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.relationship-field label {
+  color: #8793a6;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.relationship-field select {
+  box-sizing: border-box;
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #293246;
+  border-radius: 7px;
+  outline: none;
+  background: #080c14;
+  color: #e5e7eb;
+  font: inherit;
+  font-size: 13px;
+}
+
+.relationship-field select:focus {
+  border-color: #6575e8;
+  box-shadow: 0 0 0 3px rgba(101, 117, 232, 0.09);
+}
+
+.relationship-error {
+  grid-column: 1 / -1;
+  padding: 9px 11px;
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  border-radius: 7px;
+  background: rgba(127, 29, 29, 0.15);
+  color: #fca5a5;
+  font-size: 12px;
+}
+
+.relationship-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.relationship-secondary-button,
+.relationship-primary-button {
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.relationship-secondary-button {
+  border: 1px solid #293246;
+  background: transparent;
+  color: #8793a6;
+}
+
+.relationship-secondary-button:hover {
+  border-color: #566176;
+  color: #e5e7eb;
+}
+
+.relationship-primary-button {
+  border: 1px solid #5363d9;
+  background: #5363d9;
+  color: #ffffff;
+}
+
+.relationship-primary-button:hover:not(:disabled) {
+  background: #6575e8;
+  border-color: #6575e8;
+}
+
+.relationship-primary-button:disabled,
+.relationship-secondary-button:disabled,
+.relationship-cancel-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 800px) {
+  .relationship-form {
+    grid-template-columns: 1fr;
+  }
+
+  .relationship-actions {
+    grid-column: auto;
+  }
+
+  .relationship-error {
+    grid-column: auto;
+  }
+}
+/* ==========================================================================
+   DASHBOARD GRAPH ACTIONS
+   ========================================================================== */
+
+.dashboard-graph-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dashboard-connect-object-button {
+  padding: 8px 12px;
+  border: 1px solid #293246;
+  border-radius: 7px;
+  background: transparent;
+  color: #aeb8c9;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dashboard-connect-object-button:hover:not(:disabled) {
+  border-color: #5665c8;
+  background: #10182a;
+  color: #c5ccff;
+}
+
+.dashboard-connect-object-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 750px) {
+  .dashboard-graph-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-connect-object-button,
+  .dashboard-add-object-button {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   BIOOS INTELLIGENCE
+   ========================================================================== */
+
+.project-intelligence-section {
+  margin-top: 36px;
+}
+
+.project-intelligence-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.project-intelligence-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 44px;
+  padding: 0 13px;
+
+  border: 1px solid #293246;
+  border-radius: 7px;
+  outline: none;
+
+  background: #080c14;
+  color: #e5e7eb;
+
+  font: inherit;
+  font-size: 13px;
+
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.project-intelligence-input::placeholder {
+  color: #596579;
+}
+
+.project-intelligence-input:focus {
+  border-color: #6575e8;
+  box-shadow:
+    0 0 0 3px rgba(101, 117, 232, 0.09);
+}
+
+.project-intelligence-button {
+  height: 44px;
+  padding: 0 17px;
+
+  border: 1px solid #5363d9;
+  border-radius: 7px;
+
+  background: #5363d9;
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition:
+    background 120ms ease,
+    border-color 120ms ease;
+}
+
+.project-intelligence-button:hover:not(:disabled) {
+  background: #6575e8;
+  border-color: #6575e8;
+}
+
+.project-intelligence-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.project-intelligence-error {
+  margin-top: 12px;
+  padding: 10px 12px;
+
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  border-radius: 7px;
+
+  background: rgba(127, 29, 29, 0.15);
+  color: #fca5a5;
+
+  font-size: 12px;
+}
+
+.project-intelligence-answer {
+  margin-top: 16px;
+  padding: 18px;
+
+  border: 1px solid #293246;
+  border-radius: 9px;
+
+  background: #0b111d;
+}
+
+.project-intelligence-answer-label,
+.project-intelligence-reference-label {
+  margin-bottom: 9px;
+
+  color: #68758a;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.project-intelligence-answer-text {
+  color: #d8deea;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.project-intelligence-references {
+  margin-top: 18px;
+  padding-top: 14px;
+
+  border-top: 1px solid #202838;
+}
+
+.project-intelligence-reference-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.project-intelligence-reference {
+  padding: 5px 8px;
+
+  border: 1px solid #293246;
+  border-radius: 5px;
+
+  background: #080c14;
+  color: #8f9bb0;
+
+  font-size: 10px;
+}
+
+.project-intelligence-empty {
+  margin-top: 14px;
+  padding: 14px;
+
+  border: 1px dashed #293246;
+  border-radius: 7px;
+
+  color: #596579;
+
+  font-size: 12px;
+  text-align: center;
+}
+
+@media (max-width: 650px) {
+  .project-intelligence-form {
+    grid-template-columns: 1fr;
+  }
+
+  .project-intelligence-button {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   ADD RELATIONSHIP
+   ========================================================================== */
+
+.add-relationship-card {
+  margin-bottom: 20px;
+  padding: 22px;
+
+  border: 1px solid #293246;
+  border-radius: 10px;
+
+  background: #0b111d;
+}
+
+.add-relationship-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.add-relationship-header h3 {
+  margin: 8px 0 5px;
+
+  color: #e5e7eb;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.add-relationship-header p {
+  margin: 0;
+
+  color: #7f8ba3;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.add-relationship-cancel-button {
+  padding: 6px 10px;
+
+  border: 1px solid #293246;
+  border-radius: 6px;
+
+  background: transparent;
+  color: #7f8ba3;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.add-relationship-cancel-button:hover:not(:disabled) {
+  border-color: #566176;
+  color: #e5e7eb;
+}
+
+.add-relationship-form {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(150px, 0.65fr)
+    minmax(0, 1fr);
+
+  gap: 16px;
+}
+
+.add-relationship-field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.add-relationship-field label {
+  color: #8793a6;
+
+  font-size: 10px;
+  font-weight: 650;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.add-relationship-field select {
+  box-sizing: border-box;
+
+  width: 100%;
+  height: 42px;
+
+  padding: 0 12px;
+
+  border: 1px solid #293246;
+  border-radius: 7px;
+
+  outline: none;
+
+  background: #080c14;
+  color: #e5e7eb;
+
+  font: inherit;
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+.add-relationship-field select:focus {
+  border-color: #6575e8;
+
+  box-shadow:
+    0 0 0 3px rgba(101, 117, 232, 0.09);
+}
+
+.add-relationship-field select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.add-relationship-error {
+  grid-column: 1 / -1;
+
+  padding: 9px 11px;
+
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  border-radius: 7px;
+
+  background: rgba(127, 29, 29, 0.15);
+  color: #fca5a5;
+
+  font-size: 12px;
+}
+
+.add-relationship-actions {
+  grid-column: 1 / -1;
+
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 8px;
+
+  padding-top: 4px;
+}
+
+.add-relationship-secondary-button,
+.add-relationship-primary-button {
+  height: 38px;
+
+  padding: 0 14px;
+
+  border-radius: 7px;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.add-relationship-secondary-button {
+  border: 1px solid #293246;
+
+  background: transparent;
+  color: #8793a6;
+}
+
+.add-relationship-secondary-button:hover:not(:disabled) {
+  border-color: #566176;
+  color: #e5e7eb;
+}
+
+.add-relationship-primary-button {
+  border: 1px solid #5363d9;
+
+  background: #5363d9;
+  color: #ffffff;
+}
+
+.add-relationship-primary-button:hover:not(:disabled) {
+  background: #6575e8;
+  border-color: #6575e8;
+}
+
+.add-relationship-primary-button:disabled,
+.add-relationship-secondary-button:disabled,
+.add-relationship-cancel-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 850px) {
+  .add-relationship-form {
+    grid-template-columns: 1fr;
+  }
+
+  .add-relationship-actions {
+    grid-column: auto;
+  }
+
+  .add-relationship-error {
+    grid-column: auto;
+  }
+}
+/* ==========================================================================
+   SELECTED RESEARCH OBJECT
+   ========================================================================== */
+
+.research-object-card {
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.research-object-card-selected {
+  border-color: #6575e8;
+  background: #10182a;
+  box-shadow:
+    0 0 0 2px rgba(101, 117, 232, 0.16),
+    0 8px 28px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================================================
+   COMPBIOGRAPH / BIOOS V1.2 — FINAL UI POLISH
+   ========================================================================== */
+
+/* ---------- Dashboard shell ---------- */
+
+.project-dashboard {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 36px 42px 70px;
+}
+
+/* ---------- Dashboard header ---------- */
+
+.dashboard-header {
+  margin-bottom: 30px;
+  padding-bottom: 26px;
+}
+
+.dashboard-title {
+  font-size: 32px;
+  letter-spacing: -0.035em;
+}
+
+.dashboard-description {
+  max-width: 680px;
+  color: #8995a9;
+}
+
+
+/* ---------- Stats ---------- */
+
+.dashboard-stats {
+  gap: 10px;
+}
+
+.dashboard-stat {
+  min-width: 92px;
+  padding: 12px 15px;
+  background: rgba(11, 17, 29, 0.82);
+  transition:
+    border-color 150ms ease,
+    background 150ms ease;
+}
+
+.dashboard-stat:hover {
+  border-color: #334155;
+  background: #0e1624;
+}
+
+.dashboard-stat-value {
+  font-size: 19px;
+}
+
+.dashboard-stat-label {
+  font-size: 9px;
+}
+
+
+/* ---------- Sections ---------- */
+
+.dashboard-section {
+  margin-bottom: 42px;
+}
+
+.dashboard-section-header {
+  margin-bottom: 16px;
+}
+
+.dashboard-section-title {
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+
+.dashboard-section-subtitle {
+  color: #68758a;
+}
+
+
+/* ---------- Section action buttons ---------- */
+
+.dashboard-add-object-button,
+.dashboard-connect-object-button {
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 7px;
+  font-size: 10px;
+  letter-spacing: 0.01em;
+}
+
+
+/* ---------- Project graph ---------- */
+
+.project-graph-section {
+  margin-top: 0;
+}
+
+.project-graph-container {
+  height: 500px;
+  border-color: #252e40;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(38, 50, 78, 0.22),
+      rgba(11, 17, 29, 0.98) 68%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.015),
+    0 10px 35px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ---------- Research objects ---------- */
+
+.object-grid {
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 12px;
+}
+
+.object-card,
+.research-object-card {
+  min-width: 0;
+  padding: 17px;
+  border-radius: 9px;
+  background: rgba(11, 17, 29, 0.88);
+}
+
+.object-card:hover,
+.research-object-card:hover {
+  border-color: #3a465d;
+  background: #0e1624;
+}
+
+
+/* ---------- Object type ---------- */
+
+.object-type {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+
+.object-type-symbol {
+  font-size: 12px;
+}
+
+.object-name {
+  margin-bottom: 7px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.object-summary {
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+
+/* ---------- Selected object ---------- */
+
+.research-object-card-selected {
+  border-color: #6878ee !important;
+  background: #10182a !important;
+  box-shadow:
+    0 0 0 1px rgba(101, 117, 232, 0.28),
+    0 10px 30px rgba(0, 0, 0, 0.24);
+}
+
+
+/* ---------- Add-object / relationship forms ---------- */
+
+.add-object-card,
+.add-relationship-card {
+  margin-bottom: 18px;
+  padding: 20px;
+  border-color: #252e40;
+  background: #0a101b;
+}
+
+.add-object-header,
+.add-relationship-header {
+  margin-bottom: 18px;
+}
+
+.add-object-header h3,
+.add-relationship-header h3 {
+  font-size: 16px;
+}
+
+
+/* ---------- Relationships ---------- */
+
+.relationship-list {
+  border-color: #252e40;
+  background: rgba(11, 17, 29, 0.88);
+}
+
+.relationship-row {
+  padding: 13px 16px;
+}
+
+.relationship-row:hover {
+  background: #0d1422;
+}
+
+.relationship-type {
+  border-color: #293246;
+  color: #7e8ba1;
+}
+
+
+/* ---------- BioOS Intelligence ---------- */
+
+.project-intelligence-section {
+  margin-top: 2px;
+  padding: 22px;
+  border: 1px solid #252e40;
+  border-radius: 10px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(17, 24, 39, 0.92),
+      rgba(10, 16, 27, 0.96)
+    );
+}
+
+.project-intelligence-section .dashboard-section-header {
+  margin-bottom: 0;
+}
+
+.project-intelligence-form {
+  margin-top: 16px;
+}
+
+.project-intelligence-input {
+  height: 42px;
+  background: #080d16;
+}
+
+.project-intelligence-button {
+  height: 42px;
+  min-width: 105px;
+}
+
+.project-intelligence-answer {
+  margin-top: 14px;
+  padding: 16px;
+  background: #080d16;
+}
+
+.project-intelligence-answer-text {
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.project-intelligence-inline-reference {
+  display: inline;
+  padding: 0 3px;
+  border: 0;
+  border-radius: 3px;
+  background: rgba(101, 117, 232, 0.10);
+  color: #9aa7ff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.project-intelligence-inline-reference:hover {
+  background: rgba(101, 117, 232, 0.18);
+  color: #c1c8ff;
+  text-decoration: none;
+}
+
+.project-intelligence-reference {
+  border-radius: 5px;
+  transition:
+    border-color 120ms ease,
+    background 120ms ease,
+    color 120ms ease;
+}
+
+.project-intelligence-reference:hover {
+  border-color: #5665c8;
+  background: #10182a;
+  color: #b8c0ff;
+}
+
+
+/* ---------- Empty states ---------- */
+
+.dashboard-loading,
+.dashboard-error,
+.dashboard-empty {
+  min-height: 220px;
+}
+
+
+/* ---------- Responsive polish ---------- */
+
+@media (max-width: 1100px) {
+  .project-dashboard {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .dashboard-header {
+    gap: 18px;
+  }
+}
+
+@media (max-width: 750px) {
+  .project-dashboard {
+    padding: 24px 18px 50px;
+  }
+
+  .dashboard-header {
+    margin-bottom: 24px;
+  }
+
+  .dashboard-title {
+    font-size: 27px;
+  }
+
+  .project-graph-container {
+    height: 420px;
+  }
+
+  .project-intelligence-section {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 500px) {
+  .project-dashboard {
+    padding: 20px 14px 40px;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-stat {
+    min-width: 0;
+  }
+
+  .project-graph-container {
+    height: 360px;
+  }
+}
+/* ==========================================================================
+   COMPBIOGRAPH / BIOOS V1.2 — DASHBOARD POLISH v2
+   ========================================================================== */
+
+/* Overall page width */
+.project-dashboard {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 30px 34px 60px !important;
+}
+
+/* --------------------------------------------------------------------------
+   HEADER
+   -------------------------------------------------------------------------- */
+
+.dashboard-header {
+  margin-bottom: 28px !important;
+  padding-bottom: 22px !important;
+  gap: 24px !important;
+}
+
+.dashboard-title {
+  font-size: 30px !important;
+  letter-spacing: -0.025em;
+}
+
+.dashboard-description {
+  max-width: 680px;
+  margin-top: 8px !important;
+  font-size: 13px !important;
+}
+
+.dashboard-stats {
+  gap: 10px !important;
+}
+
+.dashboard-stat {
+  min-width: 92px !important;
+  padding: 12px 14px !important;
+  border-radius: 8px !important;
+}
+
+.dashboard-stat-value {
+  font-size: 19px !important;
+}
+
+.dashboard-stat-label {
+  font-size: 9px !important;
+}
+
+/* --------------------------------------------------------------------------
+   SECTIONS
+   -------------------------------------------------------------------------- */
+
+.dashboard-section {
+  margin-bottom: 30px !important;
+}
+
+.dashboard-section-header {
+  margin-bottom: 12px !important;
+}
+
+.dashboard-section-title {
+  font-size: 16px !important;
+}
+
+.dashboard-section-subtitle {
+  font-size: 11px !important;
+}
+
+/* --------------------------------------------------------------------------
+   PROJECT GRAPH
+   -------------------------------------------------------------------------- */
+
+.project-graph-section {
+  margin-top: 0 !important;
+}
+
+.project-graph-container {
+  height: 460px !important;
+  border-radius: 10px !important;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(55, 70, 110, 0.20),
+      rgba(11, 17, 29, 0.98) 70%
+    ) !important;
+}
+
+/* --------------------------------------------------------------------------
+   RESEARCH OBJECTS
+   -------------------------------------------------------------------------- */
+
+.research-object-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+}
+
+.research-object-card {
+  min-width: 0;
+  padding: 17px !important;
+  border-radius: 9px !important;
+  background: #0b111d !important;
+}
+
+.research-object-card:hover {
+  border-color: #3a465d !important;
+  background: #0e1624 !important;
+}
+
+/* Type label */
+.research-object-type {
+  gap: 7px !important;
+  font-size: 9px !important;
+  letter-spacing: 0.10em !important;
+}
+
+.research-object-type span {
+  font-size: 12px !important;
+}
+
+/* Object title */
+.research-object-card h2 {
+  margin: 10px 0 7px !important;
+  font-size: 15px !important;
+  line-height: 1.35 !important;
+}
+
+/* Object description */
+.research-object-card p {
+  font-size: 12px !important;
+  line-height: 1.55 !important;
+}
+
+/* External link */
+.research-object-link {
+  margin-top: 11px !important;
+  font-size: 11px !important;
+}
+
+/* --------------------------------------------------------------------------
+   BIOOS INTELLIGENCE
+   -------------------------------------------------------------------------- */
+
+.project-intelligence-section {
+  margin-top: 4px !important;
+  padding: 20px !important;
+  border: 1px solid #293246 !important;
+  border-radius: 10px !important;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(17, 24, 39, 0.95),
+      rgba(8, 13, 22, 0.98)
+    ) !important;
+}
+
+.project-intelligence-form {
+  margin-top: 14px !important;
+}
+
+.project-intelligence-input {
+  height: 42px !important;
+}
+
+.project-intelligence-button {
+  height: 42px !important;
+}
+
+/* --------------------------------------------------------------------------
+   RELATIONSHIPS
+   -------------------------------------------------------------------------- */
+
+.relationship-list {
+  border-radius: 9px !important;
+}
+
+.relationship-row {
+  padding: 11px 14px !important;
+}
+
+.relationship-object-name {
+  font-size: 12px !important;
+}
+
+.relationship-type {
+  padding: 5px 8px !important;
+  font-size: 8px !important;
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .project-dashboard {
+    max-width: none;
+    padding: 24px !important;
+  }
+
+  .research-object-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-dashboard {
+    padding: 18px !important;
+  }
+
+  .research-object-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .project-graph-container {
+    height: 400px !important;
+  }
+}
+/* ==========================================================================
+   RELATIONSHIP LIST — FINAL POLISH
+   ========================================================================== */
+
+.relationship-list {
+  display: flex !important;
+  flex-direction: column !important;
+  border: 1px solid #252e40 !important;
+  border-radius: 9px !important;
+  overflow: hidden !important;
+  background: #0b111d !important;
+}
+
+.relationship-row {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 18px !important;
+  min-height: 62px !important;
+  padding: 12px 20px !important;
+  border-bottom: 1px solid #202838 !important;
+  background: transparent !important;
+}
+
+.relationship-row:last-child {
+  border-bottom: none !important;
+}
+
+.relationship-object {
+  min-width: 0 !important;
+}
+
+.relationship-object-type {
+  margin-bottom: 3px !important;
+  color: #596579 !important;
+  font-size: 8px !important;
+  letter-spacing: 0.10em !important;
+  text-transform: uppercase !important;
+}
+
+.relationship-object-name {
+  overflow: hidden !important;
+  color: #dce2eb !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.relationship-type {
+  justify-self: center !important;
+  padding: 5px 9px !important;
+  border: 1px solid #293246 !important;
+  border-radius: 6px !important;
+  background: #080c14 !important;
+  color: #71809a !important;
+  font-size: 8px !important;
+  font-weight: 650 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+.relationship-arrow {
+  display: none !important;
+}
+
+/* Put the target object on the right side */
+.relationship-row .relationship-object:nth-child(3) {
+  text-align: left;
+}
+
+/* Subtle hover */
+.relationship-row:hover {
+  background: #0d1422 !important;
+}
+
+/* Keep it stacked only on genuinely small screens */
+@media (max-width: 650px) {
+  .relationship-row {
+    grid-template-columns: 1fr !important;
+    gap: 7px !important;
+    padding: 14px 16px !important;
+  }
+
+  .relationship-type {
+    justify-self: start !important;
+  }
+}

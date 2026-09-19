@@ -7,6 +7,7 @@
 
 import React, {
   useCallback,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -16,10 +17,13 @@ import AskBar from "./components/AskBar";
 import ImportPanel from "./components/ImportPanel";
 import NodeDetails from "./components/NodeDetails";
 import ResearchGraph from "./components/ResearchGraph";
+import ProjectList from "./components/ProjectList";
+import ProjectDashboard from "./components/ProjectDashboard";
 
 import {
   askResearchGraph,
   extractResearchObjects,
+  getProjects,
 } from "./api/bioos";
 
 import {
@@ -49,7 +53,47 @@ export default function App() {
 
   const [selectedNodeId, setSelectedNodeId] =
     useState(null);
+  const [currentProject, setCurrentProject] =
+    useState(null);
+  useEffect(() => {
+    const parts =
+      window.location.pathname
+        .split("/")
+        .filter(Boolean);
 
+    if (
+      parts.length !== 2 ||
+      parts[0] !== "p"
+    ) {
+      return;
+    }
+
+    const slug = parts[1];
+
+    async function loadProjectFromUrl() {
+      try {
+        const projects =
+          await getProjects();
+
+        const project =
+          projects.find(
+            (item) =>
+              item.slug === slug
+          );
+
+        if (project) {
+          setCurrentProject(project);
+        }
+      } catch (error) {
+        console.error(
+          "Could not load project from URL:",
+          error
+        );
+      }
+    }
+
+    loadProjectFromUrl();
+  }, []);
 
   // -------------------------------------------------------------------------
   // Import state
@@ -415,124 +459,39 @@ export default function App() {
   // -------------------------------------------------------------------------
   // Render
   // -------------------------------------------------------------------------
-
   return (
     <div className="bioos-app">
 
-      {/* ---------------------------------------------------------------
-          Header
-      --------------------------------------------------------------- */}
+      {!currentProject ? (
+        <ProjectList
+          onOpenProject={(project) => {
+            setCurrentProject(project);
 
-      <header className="app-header">
-        <div>
-          <h1 className="app-title">
-            BioOS
-          </h1>
-
-          <p className="app-subtitle">
-            A research graph that remembers
-          </p>
-        </div>
-
-        <div className="graph-summary">
-          <span>
-            {nodes.length} objects
-          </span>
-
-          <span className="summary-divider">
-            ·
-          </span>
-
-          <span>
-            {edges.length} relationships
-          </span>
-        </div>
-      </header>
-
-
-      {/* ---------------------------------------------------------------
-          Main workspace
-      --------------------------------------------------------------- */}
-
-      <main className="workspace">
-
-        {/* Left panel */}
-        <aside className="left-panel">
-
-          <ImportPanel
-            text={importText}
-            onTextChange={setImportText}
-            onImport={handleImport}
-            loading={importLoading}
-            error={importError}
-          />
-
-
-          <ObjectLegend
-            counts={nodeCounts}
-          />
-
-        </aside>
-
-
-        {/* Graph */}
-        <section className="graph-panel">
-
-          <ResearchGraph
-            nodes={nodes}
-            edges={edges}
-            selectedNodeId={
-              selectedNodeId
-            }
-            onSelectNode={
-              handleSelectNode
-            }
-          />
-
-        </section>
-
-
-        {/* Right panel */}
-        <NodeDetails
-          node={selectedNode}
-          nodes={nodes}
-          edges={edges}
-          onSelectNode={
-            handleSelectNode
-          }
+            window.history.pushState(
+              {},
+              "",
+              `/p/${project.slug}`
+            );
+          }}
         />
+      ) : (
+        <ProjectDashboard
+          projectId={currentProject.id}
+          onBack={() => {
+            setCurrentProject(null);
 
-      </main>
-
-
-      {/* ---------------------------------------------------------------
-          Question answering
-      --------------------------------------------------------------- */}
-
-      <AskBar
-        question={question}
-        onQuestionChange={
-          setQuestion
-        }
-        onAsk={handleAsk}
-        answer={answer}
-        loading={askLoading}
-        error={askError}
-        selectedNode={
-          selectedNode
-        }
-        onSelectReference={
-          handleSelectReference
-        }
-        onSaveFinding={
-          handleSaveFinding
-        }
-      />
+            window.history.pushState(
+              {},
+              "",
+              "/"
+            );
+          }}
+        />
+      )}
 
     </div>
   );
 }
-
 
 // ---------------------------------------------------------------------------
 // Object legend
