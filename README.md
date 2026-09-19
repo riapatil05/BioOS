@@ -217,6 +217,38 @@ The database is intentionally kept local and is excluded from version control.
 
 ---
 
+# V1.2 Interface
+
+The V1.2 release introduces a persistent project workspace for computational biology research. The interface connects projects, research objects, relationships, project graphs, and BioOS Intelligence in one workspace.
+
+### Project Workspace
+
+The project list provides a persistent entry point for research projects and their scientific context.
+
+<img src="assets/v1.2/project-list.png" alt="CompBioGraph project list" width="1000">
+
+### Project Graph
+
+Research objects can be explored as a connected graph, making relationships between datasets, analyses, and hypotheses explicit.
+
+<img src="assets/v1.2/project-graph.png" alt="CompBioGraph project graph" width="1000">
+
+### BioOS Intelligence
+
+BioOS Intelligence answers questions using the structured research context stored in the project and surfaces exact research-object references.
+
+<img src="assets/v1.2/bioos-intelligence.png" alt="BioOS Intelligence grounded in project context" width="1000">
+
+### Research Relationships
+
+Relationships are persisted explicitly between research objects, allowing the project to retain connections such as `USED_IN`, `SUPPORTS`, and `RELATES_TO`.
+
+<img src="assets/v1.2/relationships.png" alt="CompBioGraph research relationships" width="1000">
+
+> The repository also retains media from the earlier BioOS prototype to document the evolution of the project.
+
+---
+
 # Original BioOS Research Graph
 
 The project retains the original BioOS scientific research-graph functionality.
