@@ -148,7 +148,6 @@ class AskResponse(BaseModel):
 # ---------------------------------------------------------------------------
 # Project Layer schemas
 # ---------------------------------------------------------------------------
-
 ResearchObjectType = Literal[
     "dataset",
     "paper",
@@ -158,8 +157,11 @@ ResearchObjectType = Literal[
     "hypothesis",
     "figure",
     "note",
+    "gene",
+    "drug",
+    "pathway",
+    "disease",
 ]
-
 
 class ProjectCreate(BaseModel):
     name: str
@@ -221,3 +223,32 @@ class ObjectRelationshipResponse(BaseModel):
     target_id: str
     type: str
     created_at: str
+
+# ---------------------------------------------------------------------------
+# Persistent project extraction import
+# ---------------------------------------------------------------------------
+
+class ExtractedObject(BaseModel):
+    tempId: str
+    type: str
+    name: str
+    summary: str = ""
+    content: str = ""
+    external_url: str = ""
+
+
+class ExtractedRelationship(BaseModel):
+    from_: str = Field(alias="from")
+    to: str
+    type: str
+
+    model_config = {
+        "populate_by_name": True
+    }
+
+
+class ProjectExtractionImport(BaseModel):
+    source_text: str = ""
+    title: str = "Imported Scientific Text"
+    objects: List[ExtractedObject]
+    relationships: List[ExtractedRelationship] = []

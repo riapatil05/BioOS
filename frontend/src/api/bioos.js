@@ -403,3 +403,33 @@ export async function createProjectRelationship({
     }
   );
 }
+// ---------------------------------------------------------------------------
+// Persistent project extraction
+// ---------------------------------------------------------------------------
+
+/**
+ * Persist a reviewed BioOS extraction into a project.
+ *
+ * The extraction itself is performed by /api/extract.
+ * This endpoint is only responsible for adding the reviewed
+ * extraction to the persistent project workspace.
+ */
+export async function importExtractionToProject(projectId, extraction, sourceText) {
+  if (!projectId) {
+    throw new Error("Project ID is required.");
+  }
+
+  if (!extraction || !Array.isArray(extraction.objects)) {
+    throw new Error("Invalid extraction result.");
+  }
+
+  return request(`/api/projects/${projectId}/import-extraction`, {
+    method: "POST",
+    body: JSON.stringify({
+      source_text: sourceText || "",
+      title: extraction.title || "Imported Scientific Text",
+      objects: extraction.objects,
+      relationships: extraction.relationships || [],
+    }),
+  });
+}

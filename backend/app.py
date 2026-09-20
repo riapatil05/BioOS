@@ -18,6 +18,7 @@ from schemas import (
     ExtractionRequest,
     ExtractionResult,
     ProjectCreate,
+    ProjectExtractionImport,
     ProjectResponse,
     ProjectUpdate,
     ObjectRelationshipCreate,
@@ -461,3 +462,255 @@ def project_context(project_id: str):
         )
 
     return context
+
+# ---------------------------------------------------------------------------
+# Persistent BioOS extraction import
+# ---------------------------------------------------------------------------
+
+EXTRACTION_TYPE_MAP = {
+    "paper": "paper",
+    "gene": "gene",
+    "drug": "drug",
+    "pathway": "pathway",
+    "disease": "disease",
+    "finding": "finding",
+    "hypothesis": "hypothesis",
+    "dataset": "dataset",
+    "code": "code",
+    "analysis": "analysis",
+    "figure": "figure",
+    "note": "note",
+}
+
+
+@app.post("/api/projects/{project_id}/import-extraction")
+def import_extraction(
+    project_id: str,
+    request: ProjectExtractionImport,
+):
+    """
+    Persist a reviewed BioOS extraction into a project.
+
+    The LLM extraction itself happens through /api/extract.
+    This endpoint takes that reviewed extraction and adds its
+    objects and relationships to the persistent project workspace.
+    """
+
+    project = get_project(project_id)
+
+    if project is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Project not found.",
+        )
+
+    if not request.objects:
+        raise HTTPException(
+            status_code=400,
+            detail="Extraction contains no research objects.",
+        )
+
+    try:
+        existing_objects = list_objects(project_id)
+
+        # Map both extraction temp IDs and normalized object identities
+        # to persistent database object IDs.
+        temp_to_persistent = {}
+
+        existing_by_key = {}
+
+        for obj in existing_objects:
+            key = (
+                obj["type"].strip().lower(),
+                obj["name"].strip().lower(),
+            )
+            existing_by_key[key] = obj["id"]
+
+        created_count = 0
+        reused_count = 0
+
+        # ---------------------------------------------------------------
+        # Persist extracted research objects
+        # ---------------------------------------------------------------
+
+        for extracted in request.objects:
+            raw_type = extracted.type.strip().lower()
+
+            object_type = EXTRACTION_TYPE_MAP.get(raw_type)
+
+            if object_type is None:
+                raise HTTPException(
+                    status_code=400,
+                    detail=(
+                        f"Unsupported extracted object type: "
+                        f"{extracted.type}"
+                    ),
+                )
+
+            if not extracted.name.strip():
+                continue
+
+            key = (
+                object_type,
+                extracted.name.strip().lower(),
+            )
+
+            if key in existing_by_key:
+                persistent_id = existing_by_key[key]
+                reused_count += 1
+
+            else:
+                created = create_object(
+                    project_id=project_id,
+                    object_type=object_type,
+                    name=extracted.name.strip(),
+                    summary=extracted.summary.strip(),
+                    content=extracted.content.strip()
+                    or request.source_text.strip(),
+                    external_url=extracted.external_url.strip(),
+                )
+
+                persistent_id = created["id"]
+
+                existing_by_key[key] = persistent_id
+                created_count += 1
+
+            temp_to_persistent[extracted.tempId] = persistent_id
+
+        # ---------------------------------------------------------------
+        # Persist extracted relationships
+        # ---------------------------------------------------------------
+
+        existing_relationships = list_relationships(project_id)
+
+        existing_relationship_keys = {
+            (
+                relationship["source_id"],
+                relationship["target_id"],
+                relationship["type"].strip().upper(),
+            )
+            for relationship in existing_relationships
+        }
+
+        relationship_count = 0
+        relationship_reused_count = 0
+
+        for extracted_relationship in request.relationships:
+            source_id = temp_to_persistent.get(
+                extracted_relationship.from_
+            )
+            target_id = temp_to_persistent.get(
+                extracted_relationship.to
+            )
+
+            # Ignore relationships whose endpoints were not persisted.
+            if source_id is None or target_id is None:
+                continue
+
+            relationship_type = (
+                extracted_relationship.type.strip().upper()
+            )
+
+            if not relationship_type:
+                continue
+
+            relationship_key = (
+                source_id,
+                target_id,
+                relationship_type,
+            )
+
+            if relationship_key in existing_relationship_keys:
+                relationship_reused_count += 1
+                continue
+
+            create_relationship(
+                project_id=project_id,
+                source_id=source_id,
+                target_id=target_id,
+                relationship_type=relationship_type,
+            )
+
+            relationship_key = (
+                source_id,
+                target_id,
+                relationship_type,
+            )
+
+            # TARGETS is directional. If an older extraction created
+            # the inverse TARGETS edge, remove it before keeping the
+            # corrected direction.
+            if relationship_type == "TARGETS":
+
+                inverse_key = (
+                    target_id,
+                    source_id,
+                    relationship_type,
+                )
+
+                if inverse_key in existing_relationship_keys:
+
+                    for existing_relationship in existing_relationships:
+
+                        if (
+                            existing_relationship["source_id"] == target_id
+                            and existing_relationship["target_id"] == source_id
+                            and existing_relationship["type"].strip().upper()
+                            == "TARGETS"
+                        ):
+                            delete_relationship(
+                                existing_relationship["id"]
+                            )
+
+                            existing_relationship_keys.discard(
+                                inverse_key
+                            )
+
+                            break
+
+
+            if relationship_key in existing_relationship_keys:
+                relationship_reused_count += 1
+                continue
+
+
+            create_relationship(
+                project_id=project_id,
+                source_id=source_id,
+                target_id=target_id,
+                relationship_type=relationship_type,
+            )
+
+            existing_relationship_keys.add(
+                relationship_key
+            )
+
+            existing_relationship_keys.add(relationship_key)
+            relationship_count += 1
+
+        return {
+            "project_id": project_id,
+            "title": request.title,
+            "objects_created": created_count,
+            "objects_reused": reused_count,
+            "relationships_created": relationship_count,
+            "relationships_reused": relationship_reused_count,
+            "object_id_map": temp_to_persistent,
+        }
+
+    except HTTPException:
+        raise
+
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=400,
+            detail=str(exc),
+        )
+
+    except Exception as exc:
+        print(f"Extraction import error: {exc}")
+
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to import extraction into project.",
+        )

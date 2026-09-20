@@ -10,6 +10,7 @@ import ProjectGraph from "./ProjectGraph";
 import AddObjectForm from "./AddObjectForm";
 import AddRelationshipForm from "./AddRelationshipForm";
 import ProjectIntelligence from "./ProjectIntelligence";
+import ProjectExtractionImport from "./ProjectExtractionImport";
 
 
 const OBJECT_META = {
@@ -332,7 +333,10 @@ export default function ProjectDashboard({
         objects={objects}
         onSelectObject={handleSelectObject}
       />
-
+      <ProjectExtractionImport
+        projectId={projectId}
+        onImported={loadDashboard}
+      />
 
       <main className="dashboard-content">
 
